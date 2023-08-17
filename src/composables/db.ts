@@ -6,8 +6,10 @@ function createPokemonStore(db: IDBDatabase) {
   const pokemonStore = db.createObjectStore("pokemon", { keyPath: "name" });
   pokemonStore.createIndex("name", "name", { unique: true });
 }
+
 export function useDB() {
   const ready = ref(false);
+
   function createDB() {
     return new Promise((resolve, reject) => {
       const request = window.indexedDB.open("PokemonPWA", 3);
