@@ -74,6 +74,10 @@ export const useDashboardStore = defineStore("dashboard", () => {
     });
 
     if (pokemon) {
+      if (!navigator.onLine) {
+        return undefined;
+      }
+
       const response = await fetch(pokemon.url);
       if (!response.ok) {
         return undefined;
@@ -81,6 +85,10 @@ export const useDashboardStore = defineStore("dashboard", () => {
 
       const data = await response.json();
       selectedPokemon.value = data;
+      const cache = await caches.open("pokemon-sprites");
+      if (!cache.match(data.sprites.front_default)) {
+        await cache.add(data.sprites.front_default);
+      }
       await putOne("pokemonDetails", data);
     }
   }

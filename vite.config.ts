@@ -6,6 +6,10 @@ import vue from '@vitejs/plugin-vue'
 export default defineConfig({
   plugins: [
     vue(),
-    VitePWA({ registerType: 'autoUpdate', devOptions: { enabled: true } }),
+    VitePWA({ registerType: 'autoUpdate', devOptions: { enabled: true }, manifest: {
+      display: "standalone",
+      name: "PWokemon",
+      
+    } }),
   ],
 })
