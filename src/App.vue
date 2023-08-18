@@ -10,7 +10,7 @@ const { createDB, db, ready } = useDB();
 
 onMounted(async () => {
   await createDB().catch((e) => console.error("Unable to setup DB: ", e));
-  await store.getAll();
+  await store.getAllPokemon();
 });
 </script>
 
